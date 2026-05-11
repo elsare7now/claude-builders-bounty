@@ -1,29 +1,13 @@
-# Claude Code Destructive Command Hook
+# CHANGELOG Generator
 
-A `PreToolUse` hook that blocks dangerous Bash commands before execution.
+A bash script that auto-generates `CHANGELOG.md` from git history.
 
-**Blocks:** `rm -rf`, `git push --force`, `DROP TABLE`, `TRUNCATE`, `DELETE FROM` without `WHERE`
+## Setup
 
-**Logs:** All blocked attempts to `~/.claude/hooks/blocked.log` with timestamp, command, and project path.
+1. Copy `changelog.sh` and `SKILL.md` into your project root
+2. Make the script executable: `chmod +x changelog.sh`
+3. Run: `bash changelog.sh`
 
-## Installation
+That's it. Your `CHANGELOG.md` is ready.
 
-```bash
-# Install in 2 commands:
-mkdir -p .claude/hooks && cp settings.json .claude/settings.json && cp hooks/pre-tool-use .claude/hooks/
-chmod +x .claude/hooks/pre-tool-use
-```
-
-## How it works
-
-- The hook runs before every Bash command in Claude Code
-- If the command contains destructive patterns, it's **denied** with an explanation
-- Non-destructive commands pass through without interference
-- All blocks are logged for review
-
-## Files
-
-| File | Purpose |
-|------|---------|
-| `.claude/settings.json` | Hook configuration (project scope) |
-| `.claude/hooks/pre-tool-use` | Python script that inspects commands |
+Claude Code users can also run `/generate-changelog` after the files are in place.
